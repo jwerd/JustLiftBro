@@ -1,0 +1,35 @@
+models:
+  Exercise:
+    softDeletes
+    title: string:100
+    description: longtext
+    is_custom: boolean:false
+    user_id: id
+  ExerciseRoutine:
+    softDeletes
+    exercise_id: id:exercise
+    routine_id: id:routine
+    user_id: id
+    sets: int
+    reps: int
+    weight: int
+  Routine:
+    softDeletes
+    user_id: id
+    title: string:100
+    exercise_id: int
+
+controllers:
+  Routine:
+    resource: index, show, create, store, edit, update
+  Exercise:
+    resource: index, create, store, edit, update
+  ExerciseRoutine:
+    create:
+      render: ExerciseRoutine.create
+    store:
+      validate: exercise_id, routine_id, sets, reps, weight
+      save: ExerciseRoutine
+      fire: NewExerciseRoutine with:ExerciseRoutine
+      flash: message
+      redirect: ExerciseRoutine.create
