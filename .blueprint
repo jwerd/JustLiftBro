@@ -1,0 +1,34 @@
+created:
+    - database/migrations/2020_05_12_023133_create_exercises_table.php
+    - database/migrations/2020_05_12_023134_create_exercise_routines_table.php
+    - database/migrations/2020_05_12_023135_create_routines_table.php
+    - app/Exercise.php
+    - app/ExerciseRoutine.php
+    - app/Routine.php
+    - database/factories/ExerciseFactory.php
+    - database/factories/ExerciseRoutineFactory.php
+    - database/factories/RoutineFactory.php
+    - app/Http/Controllers/RoutineController.php
+    - app/Http/Controllers/ExerciseController.php
+    - app/Http/Controllers/ExerciseRoutineController.php
+    - app/Events/NewExerciseRoutine.php
+    - app/Http/Requests/RoutineStoreRequest.php
+    - app/Http/Requests/RoutineUpdateRequest.php
+    - app/Http/Requests/ExerciseUpdateRequest.php
+    - app/Http/Requests/ExerciseRoutineStoreRequest.php
+    - resources/views/routine/index.blade.php
+    - resources/views/routine/create.blade.php
+    - resources/views/routine/show.blade.php
+    - resources/views/routine/edit.blade.php
+    - resources/views/exercise/edit.blade.php
+    - resources/views/ExerciseRoutine/create.blade.php
+    - tests/Feature/Http/Controllers/RoutineControllerTest.php
+    - tests/Feature/Http/Controllers/ExerciseControllerTest.php
+    - tests/Feature/Http/Controllers/ExerciseRoutineControllerTest.php
+updated:
+    - routes/web.php
+models:
+    Exercise: { softdeletes: softDeletes, title: 'string:100', description: longtext, is_custom: 'boolean:false', user_id: id }
+    ExerciseRoutine: { softdeletes: softDeletes, exercise_id: 'id:exercise', routine_id: 'id:routine', user_id: id, sets: int, reps: int, weight: int }
+    Routines: { title: 'string:100', exercise_id: int }
+    Routine: { softdeletes: softDeletes, user_id: id, title: 'string:100', exercise_id: int }
